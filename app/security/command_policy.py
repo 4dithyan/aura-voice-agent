@@ -47,6 +47,23 @@ POLICY = {
     "shutdown_pc": SecurityLevel.CONFIRMATION_REQUIRED,
     "lock_pc": SecurityLevel.CONFIRMATION_REQUIRED,
     "run_terminal_command": SecurityLevel.CONFIRMATION_REQUIRED,
+
+    # Browser tools — safe
+    "browser_open": SecurityLevel.SAFE,
+    "browser_navigate": SecurityLevel.SAFE,
+    "browser_search": SecurityLevel.SAFE,
+    "browser_scroll": SecurityLevel.SAFE,
+    "browser_screenshot": SecurityLevel.SAFE,
+    "browser_extract": SecurityLevel.SAFE,
+    "browser_back": SecurityLevel.SAFE,
+    "browser_reload": SecurityLevel.SAFE,
+    "browser_click": SecurityLevel.SAFE,
+    "browser_fill": SecurityLevel.SAFE,
+
+    # Browser tools — confirmation required
+    "browser_checkout": SecurityLevel.CONFIRMATION_REQUIRED,
+    "browser_purchase": SecurityLevel.CONFIRMATION_REQUIRED,
+    "browser_submit_order": SecurityLevel.CONFIRMATION_REQUIRED,
 }
 
 # Blocked arguments/commands (applied in tools specifically)

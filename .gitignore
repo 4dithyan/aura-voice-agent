@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Environment / secrets — NEVER commit these
+.env
+*.env.local
+*.env.production
+
+# Piper TTS binaries & voice models (too large for git)
+models/piper/
+models/piper_extracted/
+models/*.zip
+models/piper.zip
+
+# Old project folder (moved to root)
+jarvis-pc-agent/
+
+# Screenshots & temp data
+data/screenshots/
+data/*.tmp
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/settings.json
+.idea/
+*.suo
+*.user
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Playwright state
+.playwright/
+playwright-report/
+test-results/
+
+# Faster-whisper model cache
+~/.cache/huggingface/
+*.gguf
+*.bin
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Antigravity IDE
+.agents/
+
+# Piper model files (large binaries)
+*.onnx
+*.onnx.json

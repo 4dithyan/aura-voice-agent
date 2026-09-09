@@ -1,0 +1,101 @@
+"""tests/demo_site/index.html — Local test site for browser agent development."""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jarvis Test Store</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; }
+    .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+    .card { border: 1px solid #ccc; border-radius: 8px; padding: 16px; }
+    .card h3 { margin: 0 0 8px; }
+    .price { color: green; font-weight: bold; }
+    #search-box { width: 300px; padding: 8px; font-size: 16px; }
+    button { padding: 8px 16px; cursor: pointer; margin-top: 8px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+             background: rgba(0,0,0,0.5); }
+    .modal-content { background: white; margin: 15% auto; padding: 20px; width: 400px; border-radius: 8px; }
+    #checkout-form { margin-top: 20px; }
+    #checkout-form input { display: block; margin: 8px 0; padding: 8px; width: 100%; }
+  </style>
+</head>
+<body>
+  <h1>Jarvis Test Store</h1>
+  <p>A safe local site for testing the browser agent. No real purchases.</p>
+
+  <div>
+    <input id="search-box" type="text" placeholder="Search for products..." />
+    <button id="search-btn" onclick="doSearch()">Search</button>
+  </div>
+
+  <div id="results" class="products">
+    <div class="card" data-index="1">
+      <h3>Laptop Pro 15</h3>
+      <p class="price">₹45,000</p>
+      <p>Rating: 4.5 stars</p>
+      <button onclick="addToCart('Laptop Pro 15', 45000)">Add to Cart</button>
+    </div>
+    <div class="card" data-index="2">
+      <h3>Gaming Laptop X</h3>
+      <p class="price">₹49,999</p>
+      <p>Rating: 4.2 stars</p>
+      <button onclick="addToCart('Gaming Laptop X', 49999)">Add to Cart</button>
+    </div>
+    <div class="card" data-index="3">
+      <h3>Budget Laptop Mini</h3>
+      <p class="price">₹28,500</p>
+      <p>Rating: 3.9 stars</p>
+      <button onclick="addToCart('Budget Laptop Mini', 28500)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div id="cart-section" style="margin-top:30px; display:none;">
+    <h2>Cart</h2>
+    <p id="cart-item"></p>
+    <button onclick="proceedToCheckout()">Proceed to Checkout</button>
+  </div>
+
+  <div id="checkout-section" style="display:none; margin-top:30px;">
+    <h2>Checkout</h2>
+    <p id="order-summary"></p>
+    <form id="checkout-form">
+      <input type="text" name="first_name" placeholder="First Name" />
+      <input type="text" name="last_name" placeholder="Last Name" />
+      <input type="email" name="email" placeholder="Email" />
+      <input type="tel" name="phone" placeholder="Phone Number" />
+      <input type="text" name="address" placeholder="Address" />
+      <input type="text" name="city" placeholder="City" />
+      <input type="text" name="postal_code" placeholder="PIN Code" />
+      <button type="button" onclick="placeOrder()">Place Order</button>
+    </form>
+  </div>
+
+  <div id="success-section" style="display:none; margin-top:30px;">
+    <h2>✓ Order Placed!</h2>
+    <p>This was a test. No real purchase was made.</p>
+  </div>
+
+  <script>
+    let cartItem = null;
+    function doSearch() {
+      const q = document.getElementById('search-box').value;
+      document.title = `Search: ${q} - Jarvis Test Store`;
+    }
+    function addToCart(name, price) {
+      cartItem = { name, price };
+      document.getElementById('cart-item').textContent = `${name} — ₹${price.toLocaleString()}`;
+      document.getElementById('cart-section').style.display = 'block';
+    }
+    function proceedToCheckout() {
+      document.getElementById('checkout-section').style.display = 'block';
+      document.getElementById('order-summary').textContent =
+        cartItem ? `Order: ${cartItem.name} — ₹${cartItem.price.toLocaleString()}` : '';
+      window.location.hash = 'checkout';
+    }
+    function placeOrder() {
+      document.getElementById('checkout-section').style.display = 'none';
+      document.getElementById('success-section').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
