@@ -46,6 +46,11 @@ VISION_MIN_CONFIDENCE = float(os.getenv("VISION_MIN_CONFIDENCE", "0.80"))
 
 # Browser settings
 BROWSER_HEADLESS = os.getenv("BROWSER_HEADLESS", "false").lower() == "true"
+# Set to Brave executable path, or empty string to use built-in Chromium
+BROWSER_EXECUTABLE = os.getenv(
+    "BROWSER_EXECUTABLE",
+    r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe",
+)
 
 # Task / agent settings
 MAX_ACTION_RETRIES = int(os.getenv("MAX_ACTION_RETRIES", "2"))

@@ -30,14 +30,20 @@ class BrowserController:
     # ------------------------------------------------------------------ lifecycle
 
     def open(self) -> bool:
-        """Launches Playwright Chromium."""
+        """Launches Playwright with the configured browser (Brave by default)."""
         try:
             from playwright.sync_api import sync_playwright
             self._playwright = sync_playwright().start()
-            self._browser = self._playwright.chromium.launch(
+
+            executable = settings.BROWSER_EXECUTABLE
+            launch_kwargs = dict(
                 headless=settings.BROWSER_HEADLESS,
                 args=["--no-first-run", "--disable-extensions"],
             )
+            if executable:
+                launch_kwargs["executable_path"] = executable
+
+            self._browser = self._playwright.chromium.launch(**launch_kwargs)
             self._context = self._browser.new_context(
                 viewport={"width": 1280, "height": 800},
                 user_agent=(
@@ -218,12 +224,15 @@ class BrowserController:
 
     def screenshot(self) -> str:
         """Takes a screenshot and returns the path."""
-        if not self._page:
+        try:
+            if not self._page or self._page.is_closed():
+                return ""
+            path = capture_screenshot(self._page)
+            if path:
+                emitter.emit("screenshot_taken", path=path)
+            return path
+        except Exception:
             return ""
-        path = capture_screenshot(self._page)
-        if path:
-            emitter.emit("screenshot_taken", path=path)
-        return path
 
     def get_url(self) -> str:
         try:
