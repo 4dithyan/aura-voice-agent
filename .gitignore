@@ -12,13 +12,16 @@ build/
 .eggs/
 *.whl
 
-# Virtual environment
+# Virtual environment — NEVER commit, contains large binaries
 venv/
 env/
 .venv/
 ENV/
 
-# Environment / secrets — NEVER commit these
+# AI model binaries and downloaded files — too large for git
+models/
+
+# Python
 .env
 *.env.local
 *.env.production
