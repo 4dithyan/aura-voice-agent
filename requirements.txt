@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+faster-whisper
+psutil
+pyautogui
+playwright
+sounddevice
+numpy
+requests
+pydantic
+python-dotenv
+colorama
